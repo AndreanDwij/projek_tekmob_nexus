@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/constants.dart';
 import '../../core/widgets/loading_indicator.dart';
 import 'notification_provider.dart';
@@ -17,7 +18,15 @@ class NotificationDetailPage extends ConsumerWidget {
 
     if (notification == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Detail Notifikasi')),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => context.canPop()
+                ? context.pop()
+                : context.go('/notifications'),
+          ),
+          title: const Text('Detail Notifikasi'),
+        ),
         body: const LoadingIndicator(),
       );
     }
@@ -25,7 +34,15 @@ class NotificationDetailPage extends ConsumerWidget {
     ref.read(notificationProvider.notifier).markAsRead(notificationId);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detail Notifikasi')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.canPop()
+              ? context.pop()
+              : context.go('/notifications'),
+        ),
+        title: const Text('Detail Notifikasi'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(

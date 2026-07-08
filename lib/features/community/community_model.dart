@@ -216,3 +216,50 @@ class CommunityPostModel extends Equatable {
         updatedAt,
       ];
 }
+
+class CommentModel extends Equatable {
+  final String id;
+  final String postId;
+  final String userId;
+  final String userName;
+  final String? userPhotoUrl;
+  final String content;
+  final DateTime createdAt;
+
+  const CommentModel({
+    required this.id,
+    required this.postId,
+    required this.userId,
+    required this.userName,
+    this.userPhotoUrl,
+    required this.content,
+    required this.createdAt,
+  });
+
+  factory CommentModel.fromMap(Map<String, dynamic> map, String id) {
+    return CommentModel(
+      id: id,
+      postId: map['postId'] ?? '',
+      userId: map['userId'] ?? '',
+      userName: map['userName'] ?? '',
+      userPhotoUrl: map['userPhotoUrl'],
+      content: map['content'] ?? '',
+      createdAt: (map['createdAt'] as Timestamp).toDate(),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'postId': postId,
+      'userId': userId,
+      'userName': userName,
+      'userPhotoUrl': userPhotoUrl,
+      'content': content,
+      'createdAt': createdAt,
+    };
+  }
+
+  @override
+  List<Object?> get props =>
+      [id, postId, userId, userName, userPhotoUrl, content, createdAt];
+}

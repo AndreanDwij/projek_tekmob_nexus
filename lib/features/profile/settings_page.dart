@@ -18,7 +18,14 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Pengaturan')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/profile'),
+        ),
+        title: const Text('Pengaturan'),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.md),
         children: [
@@ -76,17 +83,17 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           ListTile(
             title: const Text('Bantuan'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => context.go('/help'),
+            onTap: () => context.push('/help'),
           ),
           ListTile(
             title: const Text('Kebijakan Privasi'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => context.push('/privacy-policy'),
           ),
           ListTile(
             title: const Text('Ketentuan Layanan'),
             trailing: const Icon(Icons.chevron_right),
-            onTap: () {},
+            onTap: () => context.push('/terms'),
           ),
           ListTile(
             title: const Text('Versi Aplikasi'),

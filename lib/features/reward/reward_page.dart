@@ -29,7 +29,14 @@ class _RewardPageState extends ConsumerState<RewardPage> {
     final state = ref.watch(rewardProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Reward')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/home'),
+        ),
+        title: const Text('Reward'),
+      ),
       body: RefreshIndicator(
         onRefresh: () => ref.read(rewardProvider.notifier).loadRewards(),
         child: _buildBody(state),
@@ -123,7 +130,7 @@ class _RewardPageState extends ConsumerState<RewardPage> {
             )
           else
             ...state.rewards.map((reward) => GestureDetector(
-                  onTap: () => context.go('/reward/detail/${reward.id}'),
+                  onTap: () => context.push('/reward/detail/${reward.id}'),
                   child: Container(
                     margin: const EdgeInsets.only(bottom: AppSpacing.sm),
                     padding: const EdgeInsets.all(AppSpacing.md),

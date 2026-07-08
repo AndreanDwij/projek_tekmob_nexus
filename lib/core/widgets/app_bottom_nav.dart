@@ -46,7 +46,6 @@ class AppBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSizes.bottomNavHeight,
       decoration: BoxDecoration(
         color: AppColors.surface,
         boxShadow: [
@@ -57,33 +56,39 @@ class AppBottomNav extends StatelessWidget {
           ),
         ],
       ),
-      child: BottomNavigationBar(
-        currentIndex: _currentIndex(),
-        onTap: (index) => _onTap(context, index),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: AppSizes.bottomNavHeight,
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex(),
+            onTap: (index) => _onTap(context, index),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                activeIcon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.map_outlined),
+                activeIcon: Icon(Icons.map),
+                label: 'Map',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.groups_outlined),
+                activeIcon: Icon(Icons.groups),
+                label: 'Community',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline),
+                activeIcon: Icon(Icons.person),
+                label: 'Profile',
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
-            activeIcon: Icon(Icons.map),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.groups_outlined),
-            activeIcon: Icon(Icons.groups),
-            label: 'Community',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+        ),
       ),
     );
   }

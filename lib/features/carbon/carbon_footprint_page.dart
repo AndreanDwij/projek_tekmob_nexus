@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/constants.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/custom_textfield.dart';
@@ -81,7 +82,14 @@ class _CarbonFootprintPageState extends ConsumerState<CarbonFootprintPage> {
     final state = ref.watch(carbonProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Jejak Karbon')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/home'),
+        ),
+        title: const Text('Jejak Karbon'),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(

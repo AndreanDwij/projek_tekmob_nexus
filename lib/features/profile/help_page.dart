@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/constants.dart';
 
 class HelpPage extends StatelessWidget {
@@ -7,7 +8,14 @@ class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Bantuan')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/profile'),
+        ),
+        title: const Text('Bantuan'),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.md),
         children: [

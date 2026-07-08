@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/constants.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/loading_indicator.dart';
@@ -19,7 +20,14 @@ class RewardDetailPage extends ConsumerWidget {
     if (reward == null) {
       ref.read(rewardProvider.notifier).loadRewards();
       return Scaffold(
-        appBar: AppBar(title: const Text('Detail Reward')),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () =>
+                context.canPop() ? context.pop() : context.go('/reward'),
+          ),
+          title: const Text('Detail Reward'),
+        ),
         body: const LoadingIndicator(),
       );
     }
@@ -27,7 +35,14 @@ class RewardDetailPage extends ConsumerWidget {
     final canRedeem = state.userEcoPoint >= reward.pointRequired && !reward.isOutOfStock;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Detail Reward')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/reward'),
+        ),
+        title: const Text('Detail Reward'),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

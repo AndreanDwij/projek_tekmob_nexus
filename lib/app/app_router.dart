@@ -21,6 +21,8 @@ import '../features/profile/profile_page.dart';
 import '../features/profile/edit_profile_page.dart';
 import '../features/profile/settings_page.dart';
 import '../features/profile/help_page.dart';
+import '../features/profile/privacy_policy_page.dart';
+import '../features/profile/terms_page.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -141,6 +143,14 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/help',
       builder: (context, state) => const HelpPage(),
+    ),
+    GoRoute(
+      path: '/privacy-policy',
+      builder: (context, state) => const PrivacyPolicyPage(),
+    ),
+    GoRoute(
+      path: '/terms',
+      builder: (context, state) => const TermsPage(),
     ),
   ],
 );

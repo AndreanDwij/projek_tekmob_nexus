@@ -94,7 +94,14 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     final user = ref.watch(currentUserProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profil')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/profile'),
+        ),
+        title: const Text('Edit Profil'),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: Form(

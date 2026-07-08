@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/constants.dart';
 import '../../core/widgets/empty_state_widget.dart';
 import '../../core/widgets/error_state_widget.dart';
@@ -28,7 +29,14 @@ class _LeaderboardPageState extends ConsumerState<LeaderboardPage> {
     final state = ref.watch(leaderboardProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Leaderboard')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/home'),
+        ),
+        title: const Text('Leaderboard'),
+      ),
       body: RefreshIndicator(
         onRefresh: () => ref.read(leaderboardProvider.notifier).loadLeaderboard(),
         child: _buildBody(state),

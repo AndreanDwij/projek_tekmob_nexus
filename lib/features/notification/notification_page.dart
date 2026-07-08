@@ -30,6 +30,11 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/home'),
+        ),
         title: const Text('Notifikasi'),
         actions: [
           if (state.unreadCount > 0)
@@ -211,13 +216,13 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
   void _navigateToRelated(BuildContext context, notification) {
     switch (notification.type) {
       case NotificationType.reportStatus:
-        context.go('/report/detail/${notification.relatedId}');
+        context.push('/report/detail/${notification.relatedId}');
         break;
       case NotificationType.reward:
-        context.go('/reward/detail/${notification.relatedId}');
+        context.push('/reward/detail/${notification.relatedId}');
         break;
       case NotificationType.event:
-        context.go('/community/detail/${notification.relatedId}');
+        context.push('/community/detail/${notification.relatedId}');
         break;
       case NotificationType.general:
         break;
@@ -232,5 +237,3 @@ class _NotificationPageState extends ConsumerState<NotificationPage> {
     return '${date.day}/${date.month}/${date.year}';
   }
 }
-
-

@@ -30,6 +30,11 @@ class _ReportListPageState extends ConsumerState<ReportListPage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/home'),
+        ),
         title: const Text('Riwayat Laporan'),
         actions: [
           IconButton(
@@ -43,7 +48,7 @@ class _ReportListPageState extends ConsumerState<ReportListPage> {
         child: _buildBody(state),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/report/create'),
+        onPressed: () => context.push('/report/create'),
         child: const Icon(Icons.add),
       ),
     );
@@ -77,7 +82,7 @@ class _ReportListPageState extends ConsumerState<ReportListPage> {
       itemBuilder: (context, index) {
         final report = reports[index];
         return GestureDetector(
-          onTap: () => context.go('/report/detail/${report.id}'),
+          onTap: () => context.push('/report/detail/${report.id}'),
           child: Container(
             margin: const EdgeInsets.only(bottom: AppSpacing.sm),
             padding: const EdgeInsets.all(AppSpacing.md),

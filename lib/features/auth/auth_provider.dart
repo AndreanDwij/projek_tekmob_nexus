@@ -188,5 +188,7 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
 });
 
 final currentUserProvider = Provider<UserModel?>((ref) {
-  return ref.watch(authProvider.notifier).currentUser;
+
+  ref.watch(authProvider);
+  return ref.read(authProvider.notifier).currentUser;
 });
